@@ -13,7 +13,7 @@ class BPMultiNetworkComponent extends BP_Component{
         parent::start(
                 'mnetwork',//unique id
                 __( 'Network', 'mnetwork' ),
-                untrailingslashit(BP_MNETWORK_PLUGIN_DIR)//base path
+                untrailingslashit(BP_MNETWORK_DIR)//base path
         );
     }
     function setup_globals() {
