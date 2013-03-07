@@ -129,7 +129,7 @@ class BPMultiNetworkFilter {
 		$status_sql = bp_core_get_status_sql();
                 $list_users=mnetwork_get_users($blog_id);
                 $list='('.join(',',$list_users).')';
-		$count = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(ID) FROM $wpdb->users WHERE {$status_sql} and ID IN {$list}" ) );
+		$count = $wpdb->get_var( "SELECT COUNT(ID) FROM $wpdb->users WHERE {$status_sql} and ID IN {$list}"  );
 		wp_cache_set( 'bp_total_member_count_'.$blog_id, $count, 'bp' );
 	}
 
