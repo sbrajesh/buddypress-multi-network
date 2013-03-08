@@ -11,10 +11,13 @@ class BPMultiNetworkFilter {
     private function __construct() {
 
         //scope tables
-        add_filter('bp_core_get_table_prefix', array($this, 'filter_bp_table_prefix'));
-
+       // add_filter('bp_core_get_table_prefix', array($this, 'filter_bp_table_prefix'));
+        //only filter the activity tables
+        
+        add_filter('bp_activity_global_tables',array($this,'filter_activity_tables'));
         //scope the user meta key
-        add_filter('bp_get_user_meta_key', array($this, 'filter_user_meta_key'));
+        ////no need to scope user meta
+       // add_filter('bp_get_user_meta_key', array($this, 'filter_user_meta_key'));
         //use update_option instead of update_site_option for the bpdb version
         add_filter('pre_update_site_option_bp-db-version', array($this, 'filter_bpdb_update_version'), 10, 3);
         //use get_option instead of get_site_option for bpdb version
@@ -64,6 +67,17 @@ class BPMultiNetworkFilter {
         return $wpdb->prefix; //return current blog database prefix instead of site prefix
     }
 
+    function filter_activity_tables($tables){
+        
+      global $wpdb,$bp;
+        $new_tables=array();
+        foreach($tables as $table_key=>$table_name){
+            $new_tables[$table_key]=  str_replace($bp->table_prefix, $wpdb->prefix, $table_name);
+         
+    }
+     
+    return $new_tables;
+    }
     /**
      * Filter total users sql
      * An extra IN {user list} will not cause any har incase the $include/$friends is specified
