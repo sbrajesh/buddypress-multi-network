@@ -31,6 +31,17 @@ class BPNetworkUsers{
         $networks=$wpdb->get_col($wpdb->prepare($query,$user_id));
         return $networks;
     }
+    
+  public static function get_network_users_count($network_id){
+        global $wpdb;
+        $table_users=mnetwork_get_table_name();
+       
+        $query="SELECT COUNT(DISTINCT(user_id)) FROM {$table_users} WHERE network_id=%d";
+        
+        $networks=$wpdb->get_var($wpdb->prepare($query,$network_id));
+        
+        return $networks;   
+  }  
     /**
      * Add user to a network
      * @param type $user_id
@@ -104,4 +115,7 @@ function mnetwork_get_networks($users_id){
    return  BPNetworkUsers::get_networks($user_id);
 }
 
+function mnetwork_get_total_users($network_id){
+    return  BPNetworkUsers::get_network_users_count($network_id);
+}
 ?>
