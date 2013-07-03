@@ -25,12 +25,15 @@ class BPMultiNetworkFilter {
 
         //now let us scope users to a network/blog
         //filter total users sql
-        add_filter('bp_core_get_total_users_sql', array($this, 'filter_total_users_sql'), 10, 2);
+       // add_filter('bp_core_get_total_users_sql', array($this, 'filter_total_users_sql'), 10, 2);
 
         //filter get users queries
         //filter query for get users/total users
-        add_filter('bp_core_get_paged_users_sql', array($this, 'filter_paged_users_sql'), 10, 2);
-        add_filter('bp_core_get_total_member_count',array($this,'total_member_count'));
+        //add_filter('bp_core_get_paged_users_sql', array($this, 'filter_paged_users_sql'), 10, 2);
+        //add_filter('bp_core_get_total_member_count',array($this,'total_member_count'));
+        //BuddyPress 1.7+
+        add_action('bp_pre_user_query',array($this,'users_filter'));
+        add_filter('bp_core_get_active_member_count',array($this,'filter_total_user_count'));
     }
 
     public static function get_instance() {
@@ -105,15 +108,48 @@ class BPMultiNetworkFilter {
         
         return $sql;
     }
+    //bp1.7+ total user count
+    function filter_total_user_count($count){
+        if(is_main_site())
+            return $count;//on main site, we don't need to worry about the count change
+        
+         $blog_id = get_current_blog_id();
+         
+         $count=mnetwork_get_total_users($blog_id);
+         return $count;
+         //get the total users count for current buddypress network
+         
+        
+    }
+    /** for 1.7+ user filtering*/
+    
+    public function users_filter($query_obj){
+        
+        $uid_where=$query_obj->uid_clauses['where'];
+        
+        $blog_id = get_current_blog_id();
+        
+        $users = mnetwork_get_users($blog_id);
+        
+        $list = "(" . join(',', $users) . ")";
 
+         if($uid_where)
+             $uid_where.=" AND u.user_id IN {$list}";
+        else
+            $uid_where="WHERE id IN {$list}";//we are treading a hard line here
+
+         $query_obj->uid_clauses['where']=$uid_where;   
+    }
+    //pre 1.7
     function filter_paged_users_sql($sql, $sql_array) {
         //if u want to scope on main site, please comment the next 2 lines
         if(is_main_site())
-         return $sql;//do not filter user list on amin site
+            return $sql;//do not filter user list on amin site
         //if on sub network site, let us filter users
-        global $current_blog;
-        $blog_id = $current_blog->blog_id;
+        
+        $blog_id = get_current_blog_id();
         $users = mnetwork_get_users($blog_id);
+      
         $list = "(" . join(',', $users) . ")";
         if (!empty($sql_array['pagination']))
             $pagination = array_pop($sql_array);
@@ -130,7 +166,7 @@ class BPMultiNetworkFilter {
         //echo $sql;
         return $sql;
     }
-    
+    //pre 1.7
     function total_member_count($count){
         if(is_main_site())
             return $count;
