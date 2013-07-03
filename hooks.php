@@ -120,7 +120,13 @@ class BPMultiNetworkFilter {
         
         $users = mnetwork_get_users($blog_id);
         
-        $list = "(" . join(',', $users) . ")";
+        if(empty($users)){
+            //if no users found, let us fake it
+            $users=array(0=>0);
+        }
+            
+         
+         $list = "(" . join(',', $users) . ")";
 
          if($uid_where)
              $uid_where.=" AND u.user_id IN {$list}";
@@ -139,6 +145,11 @@ class BPMultiNetworkFilter {
         $blog_id = get_current_blog_id();
         $users = mnetwork_get_users($blog_id);
       
+        if(empty($users)){
+            //if no users found, let us fake it
+            $users=array(0=>0);
+        }
+        
         $list = "(" . join(',', $users) . ")";
         if (!empty($sql_array['pagination']))
             $pagination = array_pop($sql_array);
