@@ -110,7 +110,10 @@ class BPMultiNetworkFilter {
     /** for 1.7+ user filtering*/
     
     public function users_filter($query_obj){
-        
+         
+        if(is_main_site())
+             return ;
+         
         $uid_where=$query_obj->uid_clauses['where'];
         
         $blog_id = get_current_blog_id();
