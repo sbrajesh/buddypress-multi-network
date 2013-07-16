@@ -143,11 +143,11 @@ class BPMultiNetworkFilter {
          $list = "(" . join(',', $users) . ")";
 
          if($uid_where)
-             $uid_where.=" AND u.user_id IN {$list}";
+             $uid_where.=" AND u.{$query_obj->uid_name} IN {$list}";
         else
-            $uid_where="WHERE id IN {$list}";//we are treading a hard line here
+            $uid_where="WHERE u.{$query_obj->uid_name} IN {$list}";//we are treading a hard line here
 
-         $query_obj->uid_clauses['where']=$uid_where;   
+         $query_obj->uid_clauses['where']= $uid_where;   
     }
     //pre 1.7
     function filter_paged_users_sql($sql, $sql_array) {
