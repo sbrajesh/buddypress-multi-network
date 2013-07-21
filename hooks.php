@@ -92,11 +92,11 @@ class BPMultiNetworkFilter {
     function filter_total_users_sql($sql, $sql_array) {
         
         //if you want to filter on the main site too, please comment the next two line
-         if(is_main_site())
+         if( is_main_site() )
             return $sql;
          
          //check if it is user friends component
-         if( bp_is_user() &&  bp_is_friends_component() )
+         if( bp_is_user() && bp_is_user_friends() )
              return $sql;
          
         global $current_blog;
@@ -134,7 +134,7 @@ class BPMultiNetworkFilter {
              return ;
 
          //check if it is user friends component
-         if( bp_is_user() &&  bp_is_friends_component() )
+         if( bp_is_user() &&  bp_is_user_friends() )
              return $sql;
          
          
