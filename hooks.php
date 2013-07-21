@@ -94,6 +94,11 @@ class BPMultiNetworkFilter {
         //if you want to filter on the main site too, please comment the next two line
          if(is_main_site())
             return $sql;
+         
+         //check if it is user friends component
+         if( bp_is_user() &&  bp_is_friends_component() )
+             return $sql;
+         
         global $current_blog;
         $blog_id = $current_blog->blog_id;
         $users = mnetwork_get_users($blog_id);
@@ -128,6 +133,11 @@ class BPMultiNetworkFilter {
         if(is_main_site())
              return ;
 
+         //check if it is user friends component
+         if( bp_is_user() &&  bp_is_friends_component() )
+             return $sql;
+         
+         
         $uid_where=$query_obj->uid_clauses['where'];
         
         $blog_id = get_current_blog_id();
