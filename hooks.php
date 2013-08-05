@@ -114,7 +114,7 @@ class BPMultiNetworkFilter {
         if(is_main_site())
              return ;
          
-        $uid_where=$query_obj->uid_clauses['where'];
+        $uid_where = $query_obj->uid_clauses['where'];
         
         $blog_id = get_current_blog_id();
         
@@ -128,12 +128,12 @@ class BPMultiNetworkFilter {
          
          $list = "(" . join(',', $users) . ")";
 
-         if($uid_where)
-             $uid_where.=" AND u.user_id IN {$list}";
+         if( $uid_where )
+             $uid_where .= " AND u.{$query_obj->uid_name} IN {$list}";
         else
-            $uid_where="WHERE id IN {$list}";//we are treading a hard line here
+            $uid_where = "WHERE u.{$query_obj->uid_name} IN {$list}";//we are treading a hard line here
 
-         $query_obj->uid_clauses['where']=$uid_where;   
+         $query_obj->uid_clauses['where'] = $uid_where;   
     }
     //pre 1.7
     function filter_paged_users_sql($sql, $sql_array) {
@@ -172,13 +172,13 @@ class BPMultiNetworkFilter {
             return $count;
           //  return bp_core_number_format( bp_core_get_total_member_count() );//on main site we have no issues sir
         //otherwise
-        global $current_blog,$wpdb;
-        $blog_id=$current_blog->blog_id;
+        global $current_blog, $wpdb;
+        $blog_id = $current_blog->blog_id;
         
 	if ( !$count = wp_cache_get( 'bp_total_member_count_'.$blog_id, 'bp' ) ) {
 		$status_sql = bp_core_get_status_sql();
-                $list_users=mnetwork_get_users($blog_id);
-                $list='('.join(',',$list_users).')';
+                $list_users=mnetwork_get_users( $blog_id );
+                $list='('.join(',', $list_users).')';
 		$count = $wpdb->get_var( "SELECT COUNT(ID) FROM $wpdb->users WHERE {$status_sql} and ID IN {$list}"  );
 		wp_cache_set( 'bp_total_member_count_'.$blog_id, $count, 'bp' );
 	}
