@@ -2,7 +2,7 @@
 /**
  * Plugin Name: BP Multi Network
  * Plugin URI: http://buddydev.com/plugins/buddypress-multi-network/
- * Version:1.0
+ * Version:1.0.1
  * Author:Brajesh Singh
  * Author URI: http://buddydev.com
  * Description: Helps you to Build multiple BuddyPress network on a WordPress Multisite/BuddyPress Install
