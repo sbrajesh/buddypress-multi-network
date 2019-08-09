@@ -54,7 +54,7 @@ class BPMultiNetworkHelper {
 
 		// to install and create required tables.
 		if ( is_network_admin() ) {
-			include_once BP_MNETWORK_DIR . 'install.php';
+			include_once BP_MNETWORK_DIR . 'core/bp-multi-network-install.php';
 		}
 	}
 
