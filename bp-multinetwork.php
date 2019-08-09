@@ -19,19 +19,19 @@ define( 'BP_MNETWORK_DIR', plugin_dir_path( __FILE__ ) );
 /**
  * Class BPMultiNetworkHelper
  */
-class BPMultiNetworkHelper {
+class BP_Multi_Network_Helper {
 
 	/**
 	 * Singleton.
 	 *
-	 * @var BPMultiNetworkHelper
+	 * @var BP_Multi_Network_Helper
 	 */
 	private static $instance;
 
 	/**
 	 * Get singleton instance.
 	 *
-	 * @return BPMultiNetworkHelper
+	 * @return BP_Multi_Network_Helper
 	 */
 	public static function get_instance() {
 		if ( ! isset( self::$instance ) ) {
@@ -73,13 +73,14 @@ class BPMultiNetworkHelper {
 	 */
 	public function get_table_name() {
 		global $wpdb;
-
 		return $wpdb->base_prefix . 'bp_mnetwork_users';
-
 	}
 }
 
-BPMultiNetworkHelper::get_instance();
+BP_Multi_Network_Helper::get_instance();
+
+// backward compatibility.
+class_alias( 'BP_Multi_Network_Helper', 'BPMultiNetworkHelper' );
 
 /**
  * Get the user->network mapping table.
@@ -87,8 +88,5 @@ BPMultiNetworkHelper::get_instance();
  * @return string
  */
 function mnetwork_get_table_name() {
-
-	$helper = BPMultiNetworkHelper::get_instance();
-
-	return $helper->get_table_name();
+	return BP_Multi_Network_Helper::get_instance()->get_table_name();
 }
