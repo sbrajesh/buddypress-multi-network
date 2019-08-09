@@ -4,20 +4,21 @@ defined( 'ABSPATH' ) || exit;
 
 /**
  * Class BPMultiNetworkComponent
+ * Currently, It only sets up table name on buddypress()->mnetwork.
  */
-class BPMultiNetworkComponent extends BP_Component {
+class BP_Multi_Network_Component extends BP_Component {
 
 	/**
 	 * Component.
 	 *
-	 * @var BPMultiNetworkComponent
+	 * @var BP_Multi_Network_Component
 	 */
 	private static $instance;
 
 	/**
 	 * Get the singleton instance
 	 *
-	 * @return BPMultiNetworkComponent
+	 * @return BP_Multi_Network_Component
 	 */
 	public static function get_instance() {
 		if ( ! isset( self::$instance ) ) {
@@ -59,7 +60,6 @@ class BPMultiNetworkComponent extends BP_Component {
 			// these tables can be accessed from $bp->mnetwork->table_name.
 		);
 
-
 		// all other globals.
 		// Note that global_tables is included in this array.
 		$globals = array(
@@ -70,7 +70,6 @@ class BPMultiNetworkComponent extends BP_Component {
 			'global_tables' => $global_tables,
 			'has_directory' => false,
 		);
-
 
 		// it will call do_action("bp_mnetwork_setup_global") after setting up the constants properly.
 		parent::setup_globals( $globals );

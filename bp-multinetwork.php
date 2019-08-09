@@ -7,6 +7,8 @@
  * Author URI: https://buddydev.com
  * Description: Helps you to Build multiple BuddyPress network on a WordPress Multisite/BuddyPress Install
  * License: GPL
+ *
+ * @package buddypress-multi-network
  */
 
 // Do not allow direct access over web.
@@ -44,7 +46,7 @@ class BPMultiNetworkHelper {
 	 */
 	private function __construct() {
 		// if MULTIBLOG is not enabled, dont do anything fancy.
-		add_action( 'bp_loaded', array( $this, 'network_init' ), 1 );
+		add_action( 'bp_loaded', array( $this, 'setup_network_component' ), 1 );
 		include_once( BP_MNETWORK_DIR . 'core/class-bp-mn-actions.php' );
 		include_once( BP_MNETWORK_DIR . 'core/class-bp-mn-filters.php' );
 		include_once( BP_MNETWORK_DIR . 'users.php' );
@@ -58,9 +60,9 @@ class BPMultiNetworkHelper {
 	/**
 	 * Load.
 	 */
-	public function network_init() {
-		include_once BP_MNETWORK_DIR . 'loader.php';
-		buddypress()->mnetwork = BPMultiNetworkComponent::get_instance();
+	public function setup_network_component() {
+		include_once BP_MNETWORK_DIR . 'class-bp-multi-network-component.php';
+		buddypress()->mnetwork = BP_Multi_Network_Component::get_instance();
 	}
 
 	/**

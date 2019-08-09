@@ -6,15 +6,15 @@ defined( 'ABSPATH' ) || exit;
  * Create table.
  */
 function mnetwork_install() {
-	$sql = array();
-	global $bp;
 	global $wpdb;
+	$sql             = array();
 	$charset_collate = '';
+
 	require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+
 	if ( ! empty( $wpdb->charset ) ) {
 		$charset_collate = "DEFAULT CHARACTER SET $wpdb->charset";
 	}
-
 
 	$sql[] = "CREATE TABLE IF NOT EXISTS {$wpdb->base_prefix}bp_mnetwork_users (
                                           user_id bigint(20) NOT NULL,
@@ -28,7 +28,7 @@ function mnetwork_install() {
 }
 
 /**
- * Check if already installed.
+ * Check if already installed. If not, Create table(s).
  */
 function mnetwork_check_installed() {
 	if ( is_network_admin() && is_super_admin() ) {
@@ -44,4 +44,3 @@ function mnetwork_check_installed() {
 }
 
 add_action( 'admin_init', 'mnetwork_check_installed' );
-
