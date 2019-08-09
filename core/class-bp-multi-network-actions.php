@@ -15,12 +15,12 @@ defined( 'ABSPATH' ) || exit;
 /**
  * User attachment handler.
  */
-class BPMultiNetworkActions {
+class BP_Multi_Network_Actions {
 
 	/**
 	 * Singleton.
 	 *
-	 * @var BPMultiNetworkActions
+	 * @var BP_Multi_Network_Actions
 	 */
 	private static $instance;
 
@@ -48,7 +48,7 @@ class BPMultiNetworkActions {
 	/**
 	 * Get the singleton instance
 	 *
-	 * @return BPMultiNetworkActions
+	 * @return BP_Multi_Network_Actions
 	 */
 	public static function get_instance() {
 		if ( ! isset( self::$instance ) ) {
@@ -106,9 +106,11 @@ class BPMultiNetworkActions {
 	}
 }
 
+// backward compatibility.
+class_alias( 'BP_Multi_Network_Actions', 'BPMultiNetworkActions' );
 
 // when  user is deleted by any means,
 // we should find all his network and delete all data.
 // This needs to be added in future.
 // Init.
-BPMultiNetworkActions::get_instance();
+BP_Multi_Network_Actions::get_instance();

@@ -15,12 +15,12 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Filters.
  */
-class BPMultiNetworkFilter {
+class BP_Multi_Network_Filters {
 
 	/**
 	 * Singleton.
 	 *
-	 * @var BPMultiNetworkFilter
+	 * @var BP_Multi_Network_Filters
 	 */
 	private static $instance;
 
@@ -54,7 +54,7 @@ class BPMultiNetworkFilter {
 	/**
 	 * Get the singleton.
 	 *
-	 * @return BPMultiNetworkFilter
+	 * @return BP_Multi_Network_Filters
 	 */
 	public static function get_instance() {
 		if ( ! isset( self::$instance ) ) {
@@ -285,6 +285,8 @@ class BPMultiNetworkFilter {
 	}
 
 }
+// backward compatibility.
+class_alias( 'BP_Multi_Network_Filters', 'BPMultiNetworkFilter' );
 
 // initialize filters.
-BPMultiNetworkFilter::get_instance();
+BP_Multi_Network_Filters::get_instance();

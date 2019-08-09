@@ -47,8 +47,8 @@ class BP_Multi_Network_Helper {
 	private function __construct() {
 		// if MULTIBLOG is not enabled, dont do anything fancy.
 		add_action( 'bp_loaded', array( $this, 'setup_network_component' ), 1 );
-		include_once( BP_MNETWORK_DIR . 'core/class-bp-mn-actions.php' );
-		include_once( BP_MNETWORK_DIR . 'core/class-bp-mn-filters.php' );
+		include_once( BP_MNETWORK_DIR . 'core/class-bp-multi-network-actions.php' );
+		include_once( BP_MNETWORK_DIR . 'core/class-bp-multi-network-filters.php' );
 		include_once( BP_MNETWORK_DIR . 'core/class-bp-multi-network-users.php' );
 		include_once( BP_MNETWORK_DIR . 'core/bp-multi-network-user-functions.php' );
 
