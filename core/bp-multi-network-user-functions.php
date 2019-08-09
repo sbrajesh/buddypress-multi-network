@@ -21,7 +21,7 @@ defined( 'ABSPATH' ) || exit;
  * @return bool
  */
 function mnetwork_add_user( $user_id, $network_id ) {
-	return BPNetworkUsers::add_user( $user_id, $network_id );
+	return BP_Multi_Network_Users::add_user( $user_id, $network_id );
 }
 
 /**
@@ -33,7 +33,7 @@ function mnetwork_add_user( $user_id, $network_id ) {
  * @return bool
  */
 function mnetwork_remove_user( $user_id, $network_id = false ) {
-	return BPNetworkUsers::remove_user( $user_id, $network_id );
+	return BP_Multi_Network_Users::remove_user( $user_id, $network_id );
 }
 
 /**
@@ -44,7 +44,7 @@ function mnetwork_remove_user( $user_id, $network_id = false ) {
  * @return bool
  */
 function mnetwork_remove_network( $network_id ) {
-	return BPNetworkUsers::remove_network( $network_id );
+	return BP_Multi_Network_Users::remove_network( $network_id );
 }
 
 /**
@@ -55,7 +55,7 @@ function mnetwork_remove_network( $network_id ) {
  * @return array
  */
 function mnetwork_get_users( $network_id ) {
-	return BPNetworkUsers::get_users( $network_id );
+	return BP_Multi_Network_Users::get_users( $network_id );
 }
 
 /**
@@ -66,7 +66,7 @@ function mnetwork_get_users( $network_id ) {
  * @return array
  */
 function mnetwork_get_networks( $user_id ) {
-	return BPNetworkUsers::get_networks( $user_id );
+	return BP_Multi_Network_Users::get_networks( $user_id );
 }
 
 /**
@@ -77,5 +77,5 @@ function mnetwork_get_networks( $user_id ) {
  * @return int
  */
 function mnetwork_get_total_users( $network_id ) {
-	return BPNetworkUsers::get_network_users_count( $network_id );
+	return BP_Multi_Network_Users::get_network_users_count( $network_id );
 }

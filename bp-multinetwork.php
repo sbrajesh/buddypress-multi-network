@@ -49,8 +49,8 @@ class BPMultiNetworkHelper {
 		add_action( 'bp_loaded', array( $this, 'setup_network_component' ), 1 );
 		include_once( BP_MNETWORK_DIR . 'core/class-bp-mn-actions.php' );
 		include_once( BP_MNETWORK_DIR . 'core/class-bp-mn-filters.php' );
+		include_once( BP_MNETWORK_DIR . 'core/class-bp-multi-network-users.php' );
 		include_once( BP_MNETWORK_DIR . 'core/bp-multi-network-user-functions.php' );
-		include_once( BP_MNETWORK_DIR . 'users.php' );
 
 		// to install and create required tables.
 		if ( is_network_admin() ) {

@@ -3,7 +3,7 @@
 /**
  * Manage Users for a network
  */
-class BPNetworkUsers {
+class BP_Multi_Network_Users {
 
 	/**
 	 * Get the list of users member of this network
@@ -19,7 +19,6 @@ class BPNetworkUsers {
 		$users       = $wpdb->get_col( $wpdb->prepare( $query, $network_id ) );
 
 		return $users;
-
 	}
 
 	/**
@@ -141,3 +140,6 @@ class BPNetworkUsers {
 		return true;
 	}
 }
+
+// for backward compatibility, alias.
+class_alias( 'BP_Multi_Network_Users', 'BPNetworkUsers' );
