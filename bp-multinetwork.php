@@ -1,13 +1,16 @@
 <?php
 /**
- * Plugin Name: BP Multi Network
+ * Plugin Name: BuddyPress Multi Network
  * Plugin URI: http://buddydev.com/plugins/buddypress-multi-network/
- * Version:1.0.1
+ * Version:1.0.2
  * Author:Brajesh Singh
- * Author URI: http://buddydev.com
+ * Author URI: https://buddydev.com
  * Description: Helps you to Build multiple BuddyPress network on a WordPress Multisite/BuddyPress Install
  * License: GPL
  */
+
+// Do not allow direct access over web.
+defined( 'ABSPATH' ) || exit;
 
 define( 'BP_MNETWORK_DIR', plugin_dir_path( __FILE__ ) );
 
