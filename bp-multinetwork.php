@@ -45,7 +45,8 @@ class BPMultiNetworkHelper {
 	private function __construct() {
 		// if MULTIBLOG is not enabled, dont do anything fancy.
 		add_action( 'bp_loaded', array( $this, 'network_init' ), 1 );
-		include_once( BP_MNETWORK_DIR . 'hooks.php' );
+		include_once( BP_MNETWORK_DIR . 'core/class-bp-mn-actions.php' );
+		include_once( BP_MNETWORK_DIR . 'core/class-bp-mn-filters.php' );
 		include_once( BP_MNETWORK_DIR . 'users.php' );
 
 		// to install and create required tables.
@@ -60,7 +61,6 @@ class BPMultiNetworkHelper {
 	public function network_init() {
 		include_once BP_MNETWORK_DIR . 'loader.php';
 		buddypress()->mnetwork = BPMultiNetworkComponent::get_instance();
-
 	}
 
 	/**
