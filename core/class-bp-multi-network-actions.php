@@ -32,6 +32,7 @@ class BP_Multi_Network_Actions {
 		add_action( 'wpmu_activate_user', array( $this, 'on_user_activation' ), 10, 3 );
 		// update table on add_user_to_blog(when an existing user is added to a network or a new user creates a network).
 		add_action( 'add_user_to_blog', array( $this, 'on_add_to_network' ), 10, 3 );
+		add_action( 'user_register', array( $this, 'on_registration' ), 2 );
 		// update on remove user from blog.
 		add_action( 'remove_user_from_blog', array( $this, 'on_removal_from_network' ), 10, 2 );
 
@@ -79,6 +80,15 @@ class BP_Multi_Network_Actions {
 	 */
 	public function on_add_to_network( $user_id, $role, $blog_id ) {
 		mnetwork_add_user( $user_id, $blog_id );
+	}
+
+	/**
+	 * Add user to table when they are added to a network.
+	 *
+	 * @param int $user_id user id.
+	 */
+	public function on_registration( $user_id ) {
+		mnetwork_add_user( $user_id, get_current_blog_id() );
 	}
 
 	/**

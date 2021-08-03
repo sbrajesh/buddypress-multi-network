@@ -20,8 +20,30 @@ defined( 'ABSPATH' ) || exit;
  *
  * @return bool
  */
+function mnetwork_user_exists( $user_id, $network_id ) {
+	return BP_Multi_Network_Users::exists( $user_id, $network_id );
+}
+
+
+/**
+ * Add user to a network
+ *
+ * @param int $user_id user id.
+ * @param int $network_id network id.
+ *
+ * @return bool
+ */
 function mnetwork_add_user( $user_id, $network_id ) {
-	return BP_Multi_Network_Users::add_user( $user_id, $network_id );
+
+	if ( ! $user_id || ! $network_id ) {
+		return false;
+	}
+
+	if ( ! mnetwork_user_exists( $user_id, $network_id ) ) {
+		return BP_Multi_Network_Users::add_user( $user_id, $network_id );
+	}
+
+	return true;
 }
 
 /**

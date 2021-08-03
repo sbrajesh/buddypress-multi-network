@@ -6,7 +6,25 @@
 class BP_Multi_Network_Users {
 
 	/**
-	 * Get the list of users member of this network
+	 * Checks if the user exists in the given network.
+	 *
+	 * @param int $user_id user id.
+	 * @param int $network_id network id.
+	 *
+	 * @return bool
+	 */
+	public static function exists( $user_id, $network_id ) {
+		global $wpdb;
+		$table_users = mnetwork_get_table_name();
+
+		$query = "SELECT COUNT('*') FROM {$table_users} WHERE user_id = %d AND network_id = %d";
+
+		return (bool) $wpdb->get_var( $wpdb->prepare( $query, $user_id, $network_id ) );
+	}
+
+
+	/**
+	 * Retrieves the list of users who are member of this network
 	 *
 	 * @param int $network_id network id.
 	 *
@@ -22,7 +40,7 @@ class BP_Multi_Network_Users {
 	}
 
 	/**
-	 * Get networks for the user.
+	 * Retrieves networks for the user.
 	 *
 	 * @param int $user_id user id.
 	 *
@@ -40,7 +58,7 @@ class BP_Multi_Network_Users {
 	}
 
 	/**
-	 * Get the total number of users in the given network.
+	 * Retrieves the total number of users in the given network.
 	 *
 	 * @param int $network_id network id.
 	 *
@@ -58,7 +76,7 @@ class BP_Multi_Network_Users {
 	}
 
 	/**
-	 * Add user to a network
+	 * Adds user to a network
 	 *
 	 * @param int $user_id user id.
 	 * @param int $network_id network id.
@@ -82,7 +100,7 @@ class BP_Multi_Network_Users {
 	}
 
 	/**
-	 * Remove a user from network.
+	 * Removes a user from network.
 	 *
 	 * @param int $user_id user id.
 	 * @param int $network_id network id.
@@ -117,7 +135,7 @@ class BP_Multi_Network_Users {
 	}
 
 	/**
-	 * Remove users for a network.
+	 * Removes users from a network.
 	 *
 	 * @param int $network_id network id.
 	 *
