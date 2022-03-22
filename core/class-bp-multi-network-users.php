@@ -129,7 +129,7 @@ class BP_Multi_Network_Users {
 
 		$query = "DELETE FROM {$table_users} WHERE {$where_sql}";
 
-		$wpdb->query( $wpdb->prepare( $query, $user_id, $network_id ) );
+		$wpdb->query( $query );
 
 		return true;
 	}
